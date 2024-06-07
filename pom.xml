@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>desafio_insightlab</artifactId>
+	<artifactId>desafio_insightlab_backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>desafio_insightlab</name>
+	<name>desafio_insightlab_backend</name>
 	<description>Desafio dev full stack da Insight Lb</description>
 	<properties>
 		<java.version>17</java.version>

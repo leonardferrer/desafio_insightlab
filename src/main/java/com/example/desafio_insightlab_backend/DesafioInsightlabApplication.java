@@ -1,4 +1,4 @@
-package com.example.desafio_insightlab;
+package com.example.desafio_insightlab_backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DesafioInsightlabApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DesafioInsightlabApplication.class, args);
 	}
 

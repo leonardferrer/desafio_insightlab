@@ -21,14 +21,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/suplliers")
+@RequestMapping("/suppliers")
 public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
-
-    //@Value("${")
-    //private String msg;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid SupplierRecordDto supplierRecordDto, BindingResult bindingResult) {
@@ -38,7 +35,7 @@ public class SupplierController {
 
         var supplierModel = new SupplierModel();
         BeanUtils.copyProperties(supplierRecordDto, supplierModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.save(supplierModel));
+        return ResponseEntity.status(HttpStatus.CREATED). body(supplierService.save(supplierModel));
     }
 
     @GetMapping("/{id}")
@@ -85,6 +82,19 @@ public class SupplierController {
         return ResponseEntity.status(HttpStatus.OK).body("Supplier deleted successfully.");
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<SupplierModel>> searchSuppliers(@RequestParam String name) {
+        List<SupplierModel> suppliers = supplierService.searchByCorporateReason(name);
+        if(!suppliers.isEmpty()) {
+            for(SupplierModel supplier : suppliers) {
+                UUID id = supplier.getIdSupplier();
+                supplier.add(linkTo(methodOn(SupplierController.class).getSupplier(id)).withSelfRel());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(suppliers);
+    }
+
     // incorpora no response da request os logs de validação
     private Map<String, Object> getValidationErrors(BindingResult bindingResult) {
         Map<String, Object> response = new HashMap<>();
@@ -99,4 +109,6 @@ public class SupplierController {
         response.put("errors", errors);
         return response;
     }
+
+
 }

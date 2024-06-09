@@ -30,4 +30,9 @@ public class SupplierService {
     public void deleteById(UUID id) {
         supplierRepository.deleteById(id);
     }
+
+    public List<SupplierModel> searchByCorporateReason(String corporateReason) {
+        return supplierRepository.findByCorporateReasonContainingIgnoreCase(corporateReason);
+    }
+
 }
